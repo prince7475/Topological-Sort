@@ -1,0 +1,180 @@
+You are given a list of arbitrary jobs that need to be completed; these jobs are represented by integers. 
+You are also given a list of dependencies. A dependency is represented as a pair of jobs where the first
+job is prerequisite of the second one. In other words, the second job depends on the first one; it can
+only be completed once the first job is completed. Write a function that takes in a list of jobs and a 
+list of dependencies and returns a list containing a valid order in which the given jobs can be completed.
+If no such order exists, the function should return an empty list.
+
+Input: [1,2,3,4], [[1,2],[1,3],[3,2],[4,2],[4,3]]
+Output: [1,4,3,2]
+
+main(jobs,deps)
+
+let allJobs = {}
+for(let job of jobs){
+  allJobs[job] = []
+}
+
+for(let arr of deps){
+  allJobs[arr[1]].push(arr[0])
+}
+
+let result = []
+let visited = {}
+let inprogress = {}
+
+for(let key in allJobs){
+  let feedBack = dfs(key,allJobs,result,visited,inprogress)
+  if(feedBack === -1) return []
+}
+
+return result
+
+function dfs(key,allJobs,result,visited,inprogress){
+  if(visited[key]) return result
+  if(inprogress[key]) return -1
+  
+  for(let child of allJobs[key]){
+    let feedBack = dfs(child,allJobs,result,visited,inprogress)
+    if(feedBack === -1){
+      return -1 
+    }
+  }
+  
+  result.push(key)
+  visited[key] = true
+  inprogress[key] = false
+  return array
+}
+
+
+function topologicalSort(jobs,deps){
+  let allJobs = {}
+  for(let job of jobs){
+    allJobs[job] = []
+  }
+  
+  for(let arr of deps){
+    allJobs[arr[1]].push(arr[0])
+  }
+  
+  let result = []
+  let visited = {}
+  let inprogress = {}
+  
+  for(key in allJobs){
+    let feedBack = dfs(key, allJobs,result,visited,inprogress)
+    if(feedBack === -1){
+      return []
+    }
+  }
+  
+  return result
+  
+}
+
+function dfs(key,allJobs,result,visited,inprogress){
+  if(visited[key]) return 
+  if(inprogress[key]) return -1
+  inprogress[key] = true
+  for(let child of allJobs[key]){
+   let feedBack = dfs(child,allJobs,result,visited,inprogress)
+   if(feedBack === -1){
+    return -1
+   }
+  }
+  
+  inprogress[key] = false
+  result.push(key)
+  visited[key] = true
+  return result
+}
+
+
+
+
+
+
+
+
+
+function topologicalSort(jobs,deps){
+  let allJobs = {}
+  for(let job of jobs){
+    allJobs[job] = []
+  }
+  
+  for(let arr of deps){
+    allJobs[arr[1]].push(arr[0])
+  }
+  
+  let result = []
+  let visited = {}
+  let inprogress = {}
+  
+  for(let node in allJobs){
+     let feedBack = dfs(node,allJobs,result,visited,inprogress)
+     if(feedBack === -1){
+      return []
+     }
+  }
+  
+  return result
+}
+
+function dfs(node,allJobs,result,visited,inprogress){
+  if(visited[node]) return
+  if(inprogress[node]) return -1
+  inprogress[node] = true
+  for(let child of allJobs[node]){
+   let feedBack = dfs(child,allJobs,result,visited,inprogress)
+   if(feedBack === -1){
+    return -1
+   }
+  }
+  
+  result.push(node)
+  visited[node] = true
+  inprogress[node] = false
+  return result
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
